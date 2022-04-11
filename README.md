@@ -1,5 +1,14 @@
+![PyPI - License](https://img.shields.io/pypi/l/wdsparql?style=for-the-badge)
+![PyPI](https://img.shields.io/pypi/v/wdsparql?style=for-the-badge)
+![PyPI - Status](https://img.shields.io/pypi/status/wdsparql?style=for-the-badge)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/daviddavo/wdsparql/HEAD?labpath=sample.ipynb)
+
 # wdsparqlmagic
 IPython magic to run Wikidata's Sparql queries on the notebooks
+
+## Sample Notebook
+
+You can run the sample notebook on [binder](https://mybinder.org/v2/gh/daviddavo/wdsparql/HEAD?labpath=sample.ipynb)
 
 ## Features
 
@@ -16,21 +25,22 @@ IPython magic to run Wikidata's Sparql queries on the notebooks
 - [x] What happens if an error occurs?
   - Raising custom exception
 - [x] Expose the last query result to the namespace as a pandas dataframe
-- [ ] Create setup.py
-- [ ] Upload to pypi
-- [ ] For displaying, stop using dataframes and use a custom class
-  - [ ] Make links clickable
-  - [ ] Display images
-  - [ ] Display map
+- [x] Create setup.py
+- [x] Upload to pypi
 - [x] Make sample notebook (use wikipedia's queries)
-- [ ] Testing
-  - [ ] Unit testing for the functions
-  - [ ] Visual testing for the sample notebook
-- [ ] Write the README.md
-  - [ ] Button to "run with binder"
+- [x] Write the README.md
+  - [x] Button to "run with binder"
   - [x] Explain all the magics:
     - [x] wdsparql
     - [x] wdseturl
     - [x] wdreseturl
+- [ ] Testing
+  - [ ] Unit testing for the functions
+  - [ ] Visual testing for the sample notebook
+- [ ] Make build and upload automatically using github actions
+- [ ] For displaying, stop using dataframes and use a custom class
+  - [ ] Make links clickable
+  - [ ] Display images
+  - [ ] Display map
 - [ ] Adding more queries than the simple ones to the notebook
 - [ ] Making a new kernel instead of an extension (select cell language: sparql)
