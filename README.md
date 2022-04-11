@@ -34,10 +34,12 @@ You can run the sample notebook on [binder](https://mybinder.org/v2/gh/daviddavo
     - [x] wdsparql
     - [x] wdseturl
     - [x] wdreseturl
-- [ ] Testing
-  - [ ] Unit testing for the functions
+- [x] Testing
+  - [x] Unit testing for the functions
   - [ ] Visual testing for the sample notebook
-- [ ] Make build and upload automatically using github actions
+- [ ] Make test, build and upload automatically using github actions
+  - [ ] Check linting tools
+  - [ ] Use matrix to check with multiple python versions
 - [ ] For displaying, stop using dataframes and use a custom class
   - [ ] Make links clickable
   - [ ] Display images

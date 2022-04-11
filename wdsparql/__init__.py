@@ -1,9 +1,11 @@
 from . import wdsparqlmagic
-from .wdsparqlmagic import wdSparQLJSON, wdSpaqrQLPandas
+from .exceptions import MalformedQueryException
+from .wdsparqlmagic import wdSparQLJSON, wdSparQLPandas
 
 __all__ = [
     'wdSparQLJSON',
-    'wdSpaqrQLPandas',
+    'wdSparQLPandas',
+    'MalformedQueryException',
 ]
 
 

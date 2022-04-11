@@ -6,24 +6,10 @@ import pandas as pd
 
 from IPython.core.magic import needs_local_scope
 
+from .exceptions import MalformedQueryException
+
 WD_URL = "https://query.wikidata.org/sparql"
 magic_wd_url = WD_URL
-
-
-class MalformedQueryException(HTTPError):
-    """ Wrapper form malformed queries """
-
-    def __init__(self, httperr: HTTPError):
-        super().__init__(
-            request=httperr.request,
-            response=httperr.response
-        )
-
-    def __str__(self):
-        if self.response.status_code == 400:
-            return f'400 Bad Request: {self.response.text}'
-
-        return super().__str__()
 
 
 def _json2Pd(j: dict) -> pd.DataFrame:
@@ -35,7 +21,7 @@ def _json2Pd(j: dict) -> pd.DataFrame:
 
     data = map(_getRow, j['results']['bindings'])
 
-    return pd.DataFrame(data, columns=columns)
+    return pd.DataFrame(data, columns=columns).convert_dtypes().apply(pd.to_numeric, errors='ignore')
 
 
 def wdSparQLJSON(query, wd_url=WD_URL) -> dict:
@@ -44,12 +30,20 @@ def wdSparQLJSON(query, wd_url=WD_URL) -> dict:
         'format': 'json',
     })
 
-    r.raise_for_status()
+    try:
+        r.raise_for_status()
+    except HTTPError as e:
+        r: requests.Response = e.response
+
+        if r.status_code == 400:  # Bad Request
+            raise MalformedQueryException(e) from None
+
+        raise
 
     return r.json()
 
 
-def wdSpaqrQLPandas(query, wd_url=WD_URL) -> pd.DataFrame:
+def wdSparQLPandas(query, wd_url=WD_URL) -> pd.DataFrame:
     return _json2Pd(wdSparQLJSON(query, wd_url))
 
 
@@ -58,23 +52,15 @@ def wdsparql(line: str, cell: str, local_ns=None):
     """ Ejecuta directamente consultas SPARQL en wikidata """
     params = line.split(',')
 
-    try:
-        result = wdSparQLJSON(cell, magic_wd_url)
+    result = wdSparQLJSON(cell, magic_wd_url)
 
-        if "showjson" in params:
-            print(json.dumps(result, indent=2))
+    if "showjson" in params:
+        print(json.dumps(result, indent=2))
 
-        df = _json2Pd(result)
-        local_ns['_dfwd'] = df
+    df = _json2Pd(result)
+    local_ns['_dfwd'] = df
 
-        return df
-    except HTTPError as e:
-        r: requests.Response = e.response
-
-        if r.status_code == 400:  # Bad Request
-            raise MalformedQueryException(e) from None
-
-        raise
+    return df
 
 
 def wdseturl(line):
