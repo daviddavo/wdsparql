@@ -1,9 +1,9 @@
 from . import wdsparqlmagic
-from .wdsparqlmagic import wdSparQLQueryJSON, wdSpaqrQLQueryPandas
+from .wdsparqlmagic import wdSparQLJSON, wdSpaqrQLPandas
 
 __all__ = [
-    'wdSparQLQueryJSON',
-    'wdSpaqrQLQueryPandas',
+    'wdSparQLJSON',
+    'wdSpaqrQLPandas',
 ]
 
 
