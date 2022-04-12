@@ -14,21 +14,24 @@ magic_wd_url = WD_URL
 
 
 def _json2Pd(j: Dict[str, Any]) -> pd.DataFrame:
-    columns = j['head']['vars']
+    columns = j["head"]["vars"]
 
     def _getRow(r: Dict[str, Dict[str, Any]]) -> List[Any]:
-        return [r[c]['value'] if c in r else None for c in columns]
+        return [r[c]["value"] if c in r else None for c in columns]
 
-    data = map(_getRow, j['results']['bindings'])
+    data = map(_getRow, j["results"]["bindings"])
 
-    return pd.DataFrame(data, columns=columns).apply(pd.to_numeric, errors='ignore')
+    return pd.DataFrame(data, columns=columns).apply(pd.to_numeric, errors="ignore")
 
 
-def wdSparQLJSON(query: str, wd_url: str=WD_URL) -> Any:
-    r = requests.get(wd_url, params={
-        'query': query,
-        'format': 'json',
-    })
+def wdSparQLJSON(query: str, wd_url: str = WD_URL) -> Any:
+    r = requests.get(
+        wd_url,
+        params={
+            "query": query,
+            "format": "json",
+        },
+    )
 
     try:
         r.raise_for_status()
@@ -49,8 +52,8 @@ def wdSparQLPandas(query: str, wd_url: str = WD_URL) -> pd.DataFrame:
 
 @needs_local_scope
 def wdsparql(line: str, cell: str, local_ns: Dict[str, Any] = dict()) -> pd.DataFrame:
-    """ Ejecuta directamente consultas SPARQL en wikidata """
-    params = line.split(',')
+    """Ejecuta directamente consultas SPARQL en wikidata"""
+    params = line.split(",")
 
     result = wdSparQLJSON(cell, magic_wd_url)
 
@@ -58,7 +61,7 @@ def wdsparql(line: str, cell: str, local_ns: Dict[str, Any] = dict()) -> pd.Data
         print(json.dumps(result, indent=2))
 
     df = _json2Pd(result)
-    local_ns['_dfwd'] = df
+    local_ns["_dfwd"] = df
 
     return df
 
