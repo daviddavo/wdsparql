@@ -1,9 +1,6 @@
-from . import wdsparqlmagic
+from ._version import version as __version__
 
-try:
-    from ._version import version as __version__
-except ImportError:
-    __version__ = "Unknown"
+from . import wdsparqlmagic
 from .exceptions import MalformedQueryException
 from .wdsparqlmagic import wdSparQLJSON, wdSparQLPandas
 
