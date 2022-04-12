@@ -1,4 +1,8 @@
 from . import wdsparqlmagic
+try:
+    from ._version import version as __version__
+except ImportError:
+    __version__ = 'Unknown'
 from .exceptions import MalformedQueryException
 from .wdsparqlmagic import wdSparQLJSON, wdSparQLPandas
 
@@ -6,6 +10,7 @@ __all__ = [
     'wdSparQLJSON',
     'wdSparQLPandas',
     'MalformedQueryException',
+    '__version__',
 ]
 
 
