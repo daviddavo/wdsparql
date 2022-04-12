@@ -47,7 +47,8 @@ Just add a new tag or release with `git tag vX.Y.Z -m "<Comment>"; git push --ta
   - [x] Check linting tools
   - [x] Use matrix to check with multiple python versions
 - [ ] For displaying, stop using dataframes and use a custom class
-  - [ ] Make links clickable
+  - [x] Make links clickable
+  - [ ] Make items appear as `<a href="<link">Q1984194810</a>`
   - [ ] Display images
   - [ ] Display map
 - [ ] Adding more queries than the simple ones to the notebook

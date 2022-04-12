@@ -1,6 +1,9 @@
 # Created in build
 wdsparql/_version.py
 
+# Not pushable
+pruebas.ipynb
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

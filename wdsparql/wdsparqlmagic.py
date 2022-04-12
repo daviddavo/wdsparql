@@ -6,6 +6,7 @@ import requests
 from requests.exceptions import HTTPError
 import pandas as pd
 from IPython.core.magic import needs_local_scope
+from IPython.display import HTML
 
 from .exceptions import MalformedQueryException
 
@@ -63,7 +64,7 @@ def wdsparql(line: str, cell: str, local_ns: Dict[str, Any] = dict()) -> pd.Data
     df = _json2Pd(result)
     local_ns["_dfwd"] = df
 
-    return df
+    return HTML(df.to_html(notebook=True, escape=False, render_links=True))
 
 
 def wdseturl(line: str) -> None:
