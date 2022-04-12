@@ -10,7 +10,7 @@ class MalformedQueryException(HTTPError):
             response=httperr.response
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.response.status_code == 400:
             return f'400 Bad Request: {self.response.text}'
 
