@@ -1,9 +1,8 @@
 import json
-from requests.exceptions import HTTPError
+
 import requests
-
+from requests.exceptions import HTTPError
 import pandas as pd
-
 from IPython.core.magic import needs_local_scope
 
 from .exceptions import MalformedQueryException
@@ -21,7 +20,7 @@ def _json2Pd(j: dict) -> pd.DataFrame:
 
     data = map(_getRow, j['results']['bindings'])
 
-    return pd.DataFrame(data, columns=columns).convert_dtypes().apply(pd.to_numeric, errors='ignore')
+    return pd.DataFrame(data, columns=columns).apply(pd.to_numeric, errors='ignore')
 
 
 def wdSparQLJSON(query, wd_url=WD_URL) -> dict:
