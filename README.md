@@ -1,5 +1,5 @@
 ![PyPI - License](https://img.shields.io/pypi/l/wdsparql?style=for-the-badge)
-![PyPI](https://img.shields.io/pypi/v/wdsparql?style=for-the-badge)
+[![PyPI](https://img.shields.io/pypi/v/wdsparql?style=for-the-badge)](https://pypi.org/project/wdsparql/)
 ![PyPI - Status](https://img.shields.io/pypi/status/wdsparql?style=for-the-badge)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/daviddavo/wdsparql/HEAD?labpath=sample.ipynb)
 
